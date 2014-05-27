@@ -24,15 +24,15 @@ namespace :bundler do
     on fetch(:bundle_servers) do
       within release_path do
         with fetch(:bundle_env_variables, {}) do
-          options = ["install"]
-          options << "--binstubs #{fetch(:bundle_binstubs)}" if fetch(:bundle_binstubs)
-          options << "--gemfile #{fetch(:bundle_gemfile)}" if fetch(:bundle_gemfile)
-          options << "--path #{fetch(:bundle_path)}" if fetch(:bundle_path)
-          options << "--without #{fetch(:bundle_without)}" if fetch(:bundle_without)
-          options << "--jobs #{fetch(:bundle_jobs)}" if fetch(:bundle_jobs)
-          options << "#{fetch(:bundle_flags)}" if fetch(:bundle_flags)
+          command = [fetch(:bundle_cmd, "bundle"), "install"]
+          command << "--binstubs #{fetch(:bundle_binstubs)}" if fetch(:bundle_binstubs)
+          command << "--gemfile #{fetch(:bundle_gemfile)}" if fetch(:bundle_gemfile)
+          command << "--path #{fetch(:bundle_path)}" if fetch(:bundle_path)
+          command << "--without #{fetch(:bundle_without)}" if fetch(:bundle_without)
+          command << "--jobs #{fetch(:bundle_jobs)}" if fetch(:bundle_jobs)
+          command << "#{fetch(:bundle_flags)}" if fetch(:bundle_flags)
 
-          execute fetch(:bundle_cmd, 'bundle'), options
+          execute '/usr/bin/env', command
         end
       end
     end
