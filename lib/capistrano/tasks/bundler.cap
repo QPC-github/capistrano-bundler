@@ -32,7 +32,7 @@ namespace :bundler do
           options << "--jobs #{fetch(:bundle_jobs)}" if fetch(:bundle_jobs)
           options << "#{fetch(:bundle_flags)}" if fetch(:bundle_flags)
 
-          execute :bundle, options
+          execute fetch(:bundle_cmd, 'bundle'), options
         end
       end
     end
